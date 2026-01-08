@@ -1,11 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather-Forecast-App</title>
 </head>
+
 <body>
-    
+    <div class="container">
+        <div class="search-bar">
+            <input type="text" placeholder="Search city">
+            <button>🔍</button>
+        </div>
+        <div class="weather-display">
+            <div class="weather-display-content">
+                <h1 class="city">City,State</h1>
+                <div class="temp">--°C</div>
+                <div class="condition">Weather</div>
+            </div>
+            <div class="weather-display-icon">
+                <img alt="Weather-Icon">
+            </div>
+        </div>
+        <div class="today-forecast">
+            <h2>Today's Forecast</h2>
+            <div class="hours">
+                <!-- hourly cards -->
+            </div>
+        </div>
+        <div class="air-conditions">
+            <h2>Air Conditions</h2>
+            <div>
+                <h3>Humidity</h3>
+                <p>--%</p>
+            </div>
+            <div>
+                <h3>Pressure</h3>
+                <p>--hPa</p>
+            </div>
+            <div>
+                <h3>Wind</h3>
+                <p>--km/h</p>
+            </div>
+            <div>
+                <h3>UV Index</h3>
+                <p>-</p>
+            </div>
+        </div>
+        <div class="weekly-forecast">
+            <h2>7 day Forecast</h2>
+            <div class="daily">
+                <!-- daily cards -->
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>

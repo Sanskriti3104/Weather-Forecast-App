@@ -1,2 +1,49 @@
-/* styles.css */
+/* RESET */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+/* BODY */
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0f172a, #020617);
+    color: #e5e7eb;
+    min-height: 100vh;
+}
+
+/* CONTAINER */
+.container{
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+
+    display: grid;
+    gap: 20px;
+
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas: 
+    "search weekly"
+    "current weekly"
+    "today weekly"
+    "air weekly";
+}
+
+/* GRID TEMPLATE AREAS */
+.search-bar{grid-area: search;}
+.weather-display{grid-area: current;}
+.today-forecast{grid-area: today;}
+.air-conditions{grid-area: air;}
+.weekly-forecast{grid-area: weekly;}
+
+/* COMMON-CARD-STYLE */
+.search-bar,
+.weather-display,
+.today-forecast,
+.air-conditions,
+.weekly-forecast{
+    background: #1e293b;
+    border-radius: 18px;
+    padding: 20px;
+}
