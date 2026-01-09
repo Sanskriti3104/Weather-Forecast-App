@@ -1,12 +1,12 @@
 /* RESET */
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 /* BODY */
-body{
+body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #0f172a, #020617);
     color: #e5e7eb;
@@ -14,7 +14,7 @@ body{
 }
 
 /* CONTAINER */
-.container{
+.container {
     max-width: 1200px;
     margin: auto;
     padding: 20px;
@@ -23,27 +23,174 @@ body{
     gap: 20px;
 
     grid-template-columns: 2fr 1fr;
-    grid-template-areas: 
-    "search weekly"
-    "current weekly"
-    "today weekly"
-    "air weekly";
+    grid-template-areas:
+        "search search"
+        "current weekly"
+        "today weekly"
+        "air weekly";
 }
 
 /* GRID TEMPLATE AREAS */
-.search-bar{grid-area: search;}
-.weather-display{grid-area: current;}
-.today-forecast{grid-area: today;}
-.air-conditions{grid-area: air;}
-.weekly-forecast{grid-area: weekly;}
+.search-bar {
+    grid-area: search;
+}
+
+.weather-display {
+    grid-area: current;
+}
+
+.today-forecast {
+    grid-area: today;
+}
+
+.air-conditions {
+    grid-area: air;
+}
+
+.weekly-forecast {
+    grid-area: weekly;
+}
 
 /* COMMON-CARD-STYLE */
 .search-bar,
 .weather-display,
 .today-forecast,
 .air-conditions,
-.weekly-forecast{
+.weekly-forecast {
     background: #1e293b;
     border-radius: 18px;
     padding: 20px;
+}
+
+/* SEARCH-BAR */
+.search-bar {
+    display: flex;
+    gap: 12px;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+
+.search-bar button {
+    padding: 14px 18px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* CURRENT WEATHER */
+.weather-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.weather-display-content .temp {
+    font-size: 64px;
+    font-weight: bold;
+    color: #38bdf8;
+}
+
+.weather-display-content .condition {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+.weather-display-icon img {
+    width: 100px;
+    height: 100px;
+}
+
+/* TODAY FORECAST */
+.today-forecast h2 {
+    margin-bottom: 14px;
+    font-size: 18px;
+}
+
+.hours {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+}
+
+/* Example hourly card style (JS will inject these) */
+.hour-card {
+    min-width: 90px;
+    background: #020617;
+    padding: 12px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+/* AIR CONDITIONS */
+.air-conditions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.air-conditions div {
+    background: #020617;
+    padding: 16px;
+    border-radius: 14px;
+}
+
+.air-conditions h3 {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-bottom: 6px;
+}
+
+.air-conditions p {
+    font-size: 20px;
+    color: #38bdf8;
+}
+
+/* WEEKLY FORECAST */
+.weekly-forecast h2 {
+    margin-bottom: 16px;
+    font-size: 18px;
+}
+
+/* Example daily card style */
+.day-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #020617;
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+/* SCROLLBAR HIDE */
+.hours::-webkit-scrollbar {
+    display: none;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "search"
+            "current"
+            "today"
+            "air"
+            "weekly";
+    }
+
+    .weather-display {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
 }
