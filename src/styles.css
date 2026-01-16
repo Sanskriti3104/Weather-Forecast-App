@@ -163,12 +163,41 @@ body {
 /* Example daily card style */
 .day-card {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 14px;
     background: #020617;
-    padding: 12px;
-    border-radius: 12px;
-    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 14px;
+    margin-bottom: 12px;
+}
+
+.day-icon {
+    width: 84px;
+    height: 84px;
+    flex-shrink: 0;
+}
+
+.day-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+}
+
+.day-temp {
+    font-size: 20px;
+    font-weight: 600;
+    color: #38bdf8;
+}
+
+.day-date {
+    font-size: 16px;
+    opacity: 0.85;
+}
+
+.day-condition {
+    font-size: 15px;
+    opacity: 0.7;
 }
 
 /* SCROLLBAR HIDE */
