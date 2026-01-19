@@ -5,10 +5,13 @@ const searchBtn = document.getElementById("searchBtn");
 const city = document.querySelector(".city");
 const temp = document.querySelector(".temp");
 const condition = document.querySelector(".condition");
+const weatherIcon = document.querySelector(".weather-display-icon");
 const humidity = document.querySelector(".humidity");
 const wind = document.querySelector(".wind");
 const pressure = document.querySelector(".pressure");
 const uv = document.querySelector(".uv");
+const todayForecast = document.querySelector(".today-forecast");
+const hoursContainer = document.querySelector(".hours");
 const weeklyForecast = document.querySelector(".weekly-forecast");
 const dailyContainer = document.querySelector(".daily");
 
@@ -32,19 +35,65 @@ async function fetchWeatherData(cityName) {
         const data = await response.json();
 
         console.log(data);
-        city.textContent = cityName;
-        temp.textContent = data.currentConditions.temp + "°C";
-        condition.textContent = data.currentConditions.conditions;
-        humidity.textContent = data.currentConditions.humidity + "%";
-        wind.textContent = data.currentConditions.windspeed + " km/h";
-        pressure.textContent = data.currentConditions.pressure + " hPa";
-        uv.textContent = data.currentConditions.uvindex;
-
+        updateWeatherDisplay(data);
         renderWeeklyForecast(data);
+        renderHourlyForecast(data);
     } catch (error) {
         alert("Unable to fetch weather data. Please check the city name.");
         console.error(error);
     }
+}
+
+function updateWeatherDisplay(data) {
+    city.textContent = data.resolvedAddress;
+    temp.textContent = data.currentConditions.temp;
+    condition.textContent = data.currentConditions.conditions;
+    humidity.textContent = data.currentConditions.humidity + "%";
+    wind.textContent = data.currentConditions.windspeed + " km/h";
+    pressure.textContent = data.currentConditions.pressure + " hPa";
+    uv.textContent = data.currentConditions.uvindex;
+
+    const weatherIcon = document.querySelector(".weather-display-icon img");
+    weatherIcon.src = `https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/PNG/1st%20Set%20-%20Color/${data.currentConditions.icon}.png`;
+    weatherIcon.alt = data.currentConditions.conditions;
+}
+
+function renderHourlyForecast(data) {
+    hoursContainer.innerHTML = "";
+
+    const now = new Date();
+
+    const upcomingHours = data.days[0].hours.filter(hour => hour.datetimeEpoch * 1000 > now.getTime()).slice(0, 7);
+    upcomingHours.forEach(hour => {
+        const hourCard = document.createElement("div");
+        hourCard.classList.add("hour-card");
+
+        const hourObj = new Date(hour.datetimeEpoch * 1000);
+        const time = hourObj.toLocaleTimeString("en-IN", {
+            hour: "2-digit",
+            minute: "2-digit"
+        });
+
+        const temp = Math.round(hour.temp);
+        const condition = hour.conditions;
+        const icon = hour.icon;
+
+        const hourCardIcon = document.createElement("img");
+        hourCardIcon.src = `https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/PNG/1st%20Set%20-%20Color/${icon}.png`;
+        hourCardIcon.alt = condition;
+        hourCardIcon.classList.add("hour-icon");
+
+        const hourCardContent = document.createElement("div");
+        hourCardContent.classList.add("hour-content");
+        hourCardContent.innerHTML = `
+            <div class="hour-temp">${temp}°F</div>
+            <div class="hour-time">${time}</div>
+        `;
+
+        hourCard.appendChild(hourCardIcon);
+        hourCard.appendChild(hourCardContent);
+        hoursContainer.appendChild(hourCard);
+    });
 }
 
 function renderWeeklyForecast(data) {
@@ -79,6 +128,6 @@ function renderWeeklyForecast(data) {
             <div class="day-condition">${condition}</div>
         `;
         dayCard.appendChild(dayCardContent);
-        weeklyForecast.appendChild(dayCard);
+        dailyContainer.appendChild(dayCard);
     })
 }

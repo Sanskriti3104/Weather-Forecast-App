@@ -92,7 +92,6 @@ body {
     align-items: center;
 }
 
-
 .weather-display-content .temp {
     font-size: 64px;
     font-weight: bold;
@@ -110,6 +109,10 @@ body {
 }
 
 /* TODAY FORECAST */
+.today-forecast {
+    padding: 16px 20px 12px;
+}
+
 .today-forecast h2 {
     margin-bottom: 14px;
     font-size: 18px;
@@ -119,6 +122,8 @@ body {
     display: flex;
     gap: 12px;
     overflow-x: auto;
+    padding-bottom: 6px;
+    align-items: stretch;
 }
 
 /* Example hourly card style (JS will inject these) */
@@ -128,6 +133,35 @@ body {
     padding: 12px;
     border-radius: 12px;
     text-align: center;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.hour-icon {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+}
+
+.hour-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.hour-temp {
+    font-size: 16px;
+    font-weight: 600;
+    color: #38bdf8;
+}
+
+.hour-time {
+    font-size: 14px;
+    opacity: 0.8;
 }
 
 /* AIR CONDITIONS */
