@@ -85,6 +85,19 @@ body {
     font-size: 18px;
 }
 
+#unitToggle {
+    padding: 14px 18px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400; 
+}
+
 /* CURRENT WEATHER */
 .weather-display {
     display: flex;

@@ -6,18 +6,18 @@ import uvIcon from "./assets/air/sun.svg";
 
 const API_KEY = process.env.WEATHER_API_KEY
 
+let unit = "us"; // metric = °C, us = °F
+let lastSearchedCity = "";
+
 const searchBtn = document.getElementById("searchBtn");
 const city = document.querySelector(".city");
 const temp = document.querySelector(".temp");
 const condition = document.querySelector(".condition");
-const weatherIcon = document.querySelector(".weather-display-icon");
 const humidity = document.querySelector(".humidity-value");
 const wind = document.querySelector(".wind-value");
 const pressure = document.querySelector(".pressure-value");
 const uv = document.querySelector(".uv-value");
-const todayForecast = document.querySelector(".today-forecast");
 const hoursContainer = document.querySelector(".hours");
-const weeklyForecast = document.querySelector(".weekly-forecast");
 const dailyContainer = document.querySelector(".daily");
 
 document.getElementById("humidityIcon").src = humidityIcon;
@@ -27,18 +27,21 @@ document.getElementById("uvIcon").src = uvIcon;
 
 searchBtn.addEventListener("click", getCity);
 
+// Function to get city name 
 function getCity() {
     const cityName = document.getElementById("cityName").value.trim();
     if (!cityName) {
         alert("Please enter a city name");
         return;
     }
+    lastSearchedCity = cityName;
     fetchWeatherData(cityName);
 }
 
+// Function to fetch weather data
 async function fetchWeatherData(cityName) {
     try {
-        const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${cityName}?&key=${API_KEY}`);
+        const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${cityName}?unitGroup=${unit}&key=${API_KEY}`);
         if (!response.ok) {
             throw new Error("City not found");
         }
@@ -54,9 +57,10 @@ async function fetchWeatherData(cityName) {
     }
 }
 
+// Function to update weather display
 function updateWeatherDisplay(data) {
     city.textContent = data.resolvedAddress;
-    temp.textContent = data.currentConditions.temp;
+    temp.textContent = Math.round(data.currentConditions.temp) + (unit === "metric" ? "°C" : "°F");
     condition.textContent = data.currentConditions.conditions;
     humidity.textContent = data.currentConditions.humidity + "%";
     wind.textContent = data.currentConditions.windspeed + " km/h";
@@ -68,6 +72,7 @@ function updateWeatherDisplay(data) {
     weatherIcon.alt = data.currentConditions.conditions;
 }
 
+// Function to render hourly forecast
 function renderHourlyForecast(data) {
     hoursContainer.innerHTML = "";
 
@@ -96,7 +101,7 @@ function renderHourlyForecast(data) {
         const hourCardContent = document.createElement("div");
         hourCardContent.classList.add("hour-content");
         hourCardContent.innerHTML = `
-            <div class="hour-temp">${temp}°F</div>
+            <div class="hour-temp">${temp}${unit === "metric" ? "°C" : "°F"}</div>
             <div class="hour-time">${time}</div>
         `;
 
@@ -106,6 +111,7 @@ function renderHourlyForecast(data) {
     });
 }
 
+// Function to render weekly forecast
 function renderWeeklyForecast(data) {
     dailyContainer.innerHTML = "";
 
@@ -133,7 +139,7 @@ function renderWeeklyForecast(data) {
         const dayCardContent = document.createElement("div");
         dayCardContent.classList.add("day-content");
         dayCardContent.innerHTML = `
-            <div class="day-temp">${temp}°F</div>
+            <div class="day-temp">${temp}${unit === "metric" ? "°C" : "°F"}</div>
             <div class="day-date">${date}</div>
             <div class="day-condition">${condition}</div>
         `;
@@ -141,3 +147,16 @@ function renderWeeklyForecast(data) {
         dailyContainer.appendChild(dayCard);
     })
 }
+
+// Toggle Logic
+const unitToggle = document.getElementById("unitToggle");
+
+unitToggle.addEventListener("click", () => {
+    if (lastSearchedCity) {
+        unit = unit === "metric" ? "us" : "metric";
+        unitToggle.textContent = unit === "metric" ? "°F" : "°C";
+        fetchWeatherData(lastSearchedCity);
+    } else {
+        alert("Please search for a city first to toggle units.");
+    }
+});
