@@ -92,6 +92,12 @@ body {
     align-items: center;
 }
 
+.weather-display-content .city{
+    font-size: 48px;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
 .weather-display-content .temp {
     font-size: 64px;
     font-weight: bold;
@@ -111,11 +117,13 @@ body {
 /* TODAY FORECAST */
 .today-forecast {
     padding: 16px 20px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .today-forecast h2 {
-    margin-bottom: 14px;
-    font-size: 18px;
+    font-size: 24px;
 }
 
 .hours {
@@ -124,6 +132,7 @@ body {
     overflow-x: auto;
     padding-bottom: 6px;
     align-items: stretch;
+    margin: 10px;
 }
 
 /* Example hourly card style (JS will inject these) */
@@ -171,19 +180,28 @@ body {
     gap: 16px;
 }
 
-.air-conditions div {
+.air-card {
     background: #020617;
     padding: 16px;
     border-radius: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-.air-conditions h3 {
+.air-icon {
+    width: 28px;
+    height: 28px;
+    filter: invert(1); /* white icons on dark bg */
+}
+
+.air-card h3 {
     font-size: 14px;
     opacity: 0.8;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
 }
 
-.air-conditions p {
+.air-card p {
     font-size: 20px;
     color: #38bdf8;
 }
@@ -237,6 +255,12 @@ body {
 /* SCROLLBAR HIDE */
 .hours::-webkit-scrollbar {
     display: none;
+}
+
+.weather-display-icon img,
+.day-icon,
+.hour-icon {
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.35));
 }
 
 /* RESPONSIVE */

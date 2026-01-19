@@ -1,4 +1,9 @@
-import "./styles.css"
+import "./styles.css";
+import humidityIcon from "./assets/air/humidity.svg";
+import pressureIcon from "./assets/air/gauge.svg";
+import windIcon from "./assets/air/wind.svg";
+import uvIcon from "./assets/air/sun.svg";
+
 const API_KEY = process.env.WEATHER_API_KEY
 
 const searchBtn = document.getElementById("searchBtn");
@@ -6,14 +11,19 @@ const city = document.querySelector(".city");
 const temp = document.querySelector(".temp");
 const condition = document.querySelector(".condition");
 const weatherIcon = document.querySelector(".weather-display-icon");
-const humidity = document.querySelector(".humidity");
-const wind = document.querySelector(".wind");
-const pressure = document.querySelector(".pressure");
-const uv = document.querySelector(".uv");
+const humidity = document.querySelector(".humidity-value");
+const wind = document.querySelector(".wind-value");
+const pressure = document.querySelector(".pressure-value");
+const uv = document.querySelector(".uv-value");
 const todayForecast = document.querySelector(".today-forecast");
 const hoursContainer = document.querySelector(".hours");
 const weeklyForecast = document.querySelector(".weekly-forecast");
 const dailyContainer = document.querySelector(".daily");
+
+document.getElementById("humidityIcon").src = humidityIcon;
+document.getElementById("pressureIcon").src = pressureIcon;
+document.getElementById("windIcon").src = windIcon;
+document.getElementById("uvIcon").src = uvIcon;
 
 searchBtn.addEventListener("click", getCity);
 
