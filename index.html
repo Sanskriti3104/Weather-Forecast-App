@@ -12,15 +12,16 @@
 
         <!-- SEARCH -->
         <div class="search-bar">
-            <input type="text" placeholder="Search city">
-            <button>🔍</button>
+            <input type="text" id="cityName" placeholder="Search city">
+            <button id="searchBtn">🔍</button>
+            <button id="unitToggle">°C</button>
         </div>
 
         <!-- CURRENT WEATHER -->
         <div class="weather-display">
             <div class="weather-display-content">
                 <h1 class="city">City,State</h1>
-                <div class="temp">--°C</div>
+                <div class="temp">--</div>
                 <div class="condition">Weather</div>
             </div>
             <div class="weather-display-icon">
@@ -38,23 +39,41 @@
 
         <!-- AIR CONDITIONS -->
         <div class="air-conditions">
-            <div>
-                <h3>Humidity</h3>
-                <p>--%</p>
+
+            <div class="air-card">
+                <img class="air-icon" id="humidityIcon" alt="Humidity">
+                <div>
+                    <h3>Humidity</h3>
+                    <p class="humidity-value">--%</p>
+                </div>
             </div>
-            <div>
-                <h3>Pressure</h3>
-                <p>--hPa</p>
+
+            <div class="air-card">
+                <img class="air-icon" id="pressureIcon" alt="Pressure">
+                <div>
+                    <h3>Pressure</h3>
+                    <p class="pressure-value">-- hPa</p>
+                </div>
             </div>
-            <div>
-                <h3>Wind</h3>
-                <p>--km/h</p>
+
+            <div class="air-card">
+                <img class="air-icon" id="windIcon" alt="Wind">
+                <div>
+                    <h3>Wind</h3>
+                    <p class="wind-value">-- km/h</p>
+                </div>
             </div>
-            <div>
-                <h3>UV Index</h3>
-                <p>-</p>
+
+            <div class="air-card">
+                <img class="air-icon" id="uvIcon" alt="UV Index">
+                <div>
+                    <h3>UV Index</h3>
+                    <p class="uv-value">--</p>
+                </div>
             </div>
+
         </div>
+
 
         <!-- WEEKLY FORECAST -->
         <div class="weekly-forecast">
@@ -63,7 +82,7 @@
                 <!-- daily cards -->
             </div>
         </div>
-        
+
     </div>
 </body>
 
